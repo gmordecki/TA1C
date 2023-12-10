@@ -12,6 +12,7 @@ In the **minimal version** each row contains
 - Media name
 - Media origin country
 - Teaser text
+- Preprocessed Teaser Text
 - Tag value
 
 The **complete version** adds:
@@ -33,7 +34,14 @@ The second annotation reaches reaching a Fleiss' κ inter annotator agreement of
 
 ## Teaser text
 
-Teaser text is a preprocessed mix of headline and tweet text that we suggest using for the classification.
+The text for each teasser emerges as a combination of both headline and tweet text. Twitter provides the option to display a link preview or not, as well as to accompany the post with an image. Often, newspapers utilize these tools to avoid revealing key information, for instance, by not showing a preview if the title spoils the information gap created by the post. Therefore, the selection of which texts to use is not trivial, and a single criterion can lead to inconsistencies with what the user reads. However, due to the technical impossibility of knowing how users see it (among other things because it depends on the device they have) and for the sake of consistency, the Teaser Text combination is always made according to the following criteria:
+- If the title is included in the tweet text or the tweet text is longer than the title, and the editing distance (a.k.a. [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance)) is less than 5, or the normalized Levenshtein similarity (computed with [textdistance](https://pypi.org/project/textdistance/)) is greater than 0.9, the tweet text is used.
+- If the tweet text is included in the title or the title is longer than the tweet text, and the editing distance is less than 5, or the normalized Levenshtein similarity is greater than 0.9, the title is used.
+- Otherwise, the title followed by the tweet text is used.
+
+## Preprocessed Teaser Text
+
+It is the same text ad Teaser text with a preprocessing that we suggest using for the classification.
 
 For both headline and tweet text it has the following **preprocessing**:
 - Substitution of emojis for the word EMOJI
@@ -43,8 +51,3 @@ For both headline and tweet text it has the following **preprocessing**:
 - Substitution of accounts (*@account*) for the word *NombrePropio*
 - Removal of strange characters and multiple spaces
 - Removal of URLs
-
-Subsequently, the text used emerges as a combination of both headline and tweet text. Twitter provides the option to display a link preview or not, as well as to accompany the post with an image. Often, newspapers utilize these tools to avoid revealing key information, for instance, by not showing a preview if the title spoils the information gap created by the post. Therefore, the selection of which texts to use is not trivial, and a single criterion can lead to inconsistencies with what the user reads. However, due to the technical impossibility of knowing how users see it (among other things because it depends on the device they have) and for the sake of consistency, the Teaser Text combination is always made according to the following criteria:
-- If the title is included in the tweet text or the tweet text is longer than the title, and the editing distance (a.k.a. [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance)) is less than 5, or the normalized Levenshtein similarity (computed with [textdistance](https://pypi.org/project/textdistance/)) is greater than 0.9, the tweet text is used.
-- If the tweet text is included in the title or the title is longer than the tweet text, and the editing distance is less than 5, or the normalized Levenshtein similarity is greater than 0.9, the title is used.
-- Otherwise, the title followed by the tweet text is used.
