@@ -26,11 +26,13 @@ The **complete version** adds:
 - Article's scraped clean text (only the news body)
 - Article's scraped images with their captions (in a JSON list)
 - Article's scraped embedded URLs (usually social media links)
-- Secondary annotator tag
+- First Annotator Tag
+- Second Annotator Tag
+- Third Annotator Tag
 
 We are going to release a third version including the article's complete HTML.
 
-The second annotation reaches reaching a Fleiss' κ inter annotator agreement of 0.78, demonstrating that the annotation criteria are precise and reduce subjectivity. We are currently working to achieve a third independent annotation and take the majority vote as ground truth.
+The three annotations reach a Fleiss' κ inter annotator agreement of 0.825, demonstrating that the annotation criteria are precise and reduce subjectivity. The majority vote is taken as ground truth.
 
 ## Teaser text
 
